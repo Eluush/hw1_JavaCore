@@ -30,20 +30,20 @@ public class ProductBasket {
     public void printContents() {
 
         boolean isEmpty = true;
-        int total = 0; // Локальная переменная для подсчета суммы
+        int total = 0;
 
         for (Product product : products) {
             if (product != null) {
                 isEmpty = false;
                 System.out.println(product.getName() + ": " + product.getPrice());
-                total += product.getPrice(); // Считаем сумму в процессе вывода
+                total += product.getPrice();
             }
         }
 
         if (isEmpty) {
             System.out.println("в корзине пусто");
         } else {
-            System.out.println("Итого: " + total); // Используем локальную total
+            System.out.println("Итого: " + total);
         }
     }
 
