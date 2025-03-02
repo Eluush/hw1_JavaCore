@@ -1,58 +1,46 @@
 package org.skypro.skyshop;
+
 import org.skypro.skyshop.all.Article;
 import org.skypro.skyshop.all.Searchable;
 import org.skypro.skyshop.all.SearchEngile;
-import org.skypro.skyshop.backet.ProductBasket;
-import org.skypro.skyshop.backet.SimpleProduct;
-import org.skypro.skyshop.product.DiscountedProduct;
-import org.skypro.skyshop.product.FixPriceProduct;
-import org.skypro.skyshop.product.Product;
 
+import org.skypro.skyshop.product.*;
 
-
+import java.util.Arrays;
 
 
 public class App {
     public static void main(String[] args) {
-        ProductBasket basket = new ProductBasket();
 
-        SimpleProduct milk = new SimpleProduct("Молоко", 50);
-        SimpleProduct apple = new SimpleProduct("Яблоки", 100);
-        DiscountedProduct fish = new DiscountedProduct("Рыба", 200, 20);
-        DiscountedProduct meat = new DiscountedProduct("Мясо", 300, 30);
-        FixPriceProduct spices = new FixPriceProduct("Специи");
-
-        basket.addProduct(milk);
-        basket.addProduct(apple);
-        basket.addProduct(fish);
-        basket.addProduct(meat);
-        basket.addProduct(spices);
+        SearchEngile engine = new SearchEngile(10);
 
 
-        basket.printContents();
+        engine.add(new Laptop("Ноутбук","Игровой ноутбук с RTX 4090"));
+        engine.add(new Smartphone("Смартфон", "Смартфон с OLED-экраном"));
+        engine.add(new Headphones("Наушники", "Беспроводные наушники с шумоподавлением"));
 
 
-        SearchEngine engine = new SearchEngine(10);
+        engine.add(new Article("Обзор ноутбуков", "Лучшие игровые ноутбуки 2024 года"));
+        engine.add(new Article("Как выбрать смартфон", "Топ-5 критериев выбора смартфона"));
+        engine.add(new Article("Новости технологий", "ИИ в повседневной жизни"));
 
-        engine.add(new Product("Смартфон"));
-        engine.add(new Product("Ноутбук"));
-        engine.add(new Product("Планшет"));
 
-        // Добавляем статьи
-        engine.add(new Article("Выбор смартфона", "Как выбрать лучший смартфон..."));
-        engine.add(new Article("Обзор ноутбуков", "Топ ноутбуков 2023..."));
+        System.out.println("=== Поиск по запросу 'ноут' ===");
+        Searchable[] results1 = engine.search("ноут");
+        System.out.println(Arrays.toString(results1));
 
-        // Поиск по запросу "смартфон"
-        Searchable[] results = engine.search("смартфон");
-        for (Searchable result : results) {
-            if (result != null) {
-                System.out.println(result.getStringRepresentation());
-            }
-        }
-    }
+        System.out.println("\n=== Поиск по запросу 'Смарт' ===");
+        Searchable[] results2 = engine.search("Смарт");
+        System.out.println(Arrays.toString(results2));
 
+        System.out.println("\n=== Поиск по запросу 'игр' ===");
+        Searchable[] results3 = engine.search("игр");
+        System.out.println(Arrays.toString(results3));
+
+        System.out.println("\n=== Поиск по запросу 'телевизор' ===");
+        Searchable[] results4 = engine.search("телевизор");
+        System.out.println(Arrays.toString(results4));
     }
 }
-
 
 

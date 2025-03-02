@@ -5,8 +5,8 @@ public class DiscountedProduct extends Product {
     private int basePrice;
 
 
-    public DiscountedProduct(String name, int basePrice, int discountPercentage) {
-        super(name);
+    public DiscountedProduct(String name,String description, int basePrice, int discountPercentage) {
+        super(name,description);
         this.basePrice = basePrice;
         this.discountPercentage = discountPercentage;
     }
