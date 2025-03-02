@@ -31,12 +31,16 @@ public class ProductBasket {
 
         boolean isEmpty = true;
         int total = 0;
+        int specialCount = 0;
 
         for (Product product : products) {
             if (product != null) {
                 isEmpty = false;
-                System.out.println(product.getName() + ": " + product.getPrice());
+                System.out.println(product);
                 total += product.getPrice();
+                if (product.isSpesial()){
+                    specialCount++;
+                }
             }
         }
 
@@ -44,6 +48,7 @@ public class ProductBasket {
             System.out.println("в корзине пусто");
         } else {
             System.out.println("Итого: " + total);
+            System.out.println("Специальных товаров: " + specialCount);
         }
     }
 
