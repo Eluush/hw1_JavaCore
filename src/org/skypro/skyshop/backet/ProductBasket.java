@@ -38,7 +38,7 @@ public class ProductBasket {
                 isEmpty = false;
                 System.out.println(product);
                 total += product.getPrice();
-                if (product.isSpesial()){
+                if (product.isSpesial()) {
                     specialCount++;
                 }
             }
