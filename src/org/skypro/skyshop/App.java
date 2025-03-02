@@ -22,6 +22,7 @@ public class App {
         basket.addProduct(meat);
         basket.addProduct(spices);
 
+
         basket.printContents();
 
     }
