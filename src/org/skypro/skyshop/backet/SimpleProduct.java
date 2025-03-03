@@ -5,8 +5,8 @@ import org.skypro.skyshop.product.Product;
 public class SimpleProduct extends Product {
     private int price;
 
-    public SimpleProduct(String name,String description, int price) {
-        super(name,description);
+    public SimpleProduct(String name, String description, int price) {
+        super(name, description);
         this.price = price;
     }
 

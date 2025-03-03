@@ -1,6 +1,8 @@
-package org.skypro.skyshop.product;
+package org.skypro.skyshop.product.ext;
 
-public class Laptop extends Product{
+import org.skypro.skyshop.product.Product;
+
+public class Laptop extends Product {
     @Override
     public int getPrice() {
         return 0;

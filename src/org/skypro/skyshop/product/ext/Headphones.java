@@ -1,6 +1,8 @@
-package org.skypro.skyshop.product;
+package org.skypro.skyshop.product.ext;
 
-public class Headphones extends Product{
+import org.skypro.skyshop.product.Product;
+
+public class Headphones extends Product {
     public Headphones(String name, String description) {
         super(name, description);
     }

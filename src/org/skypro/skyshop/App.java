@@ -4,7 +4,9 @@ import org.skypro.skyshop.all.Article;
 import org.skypro.skyshop.all.Searchable;
 import org.skypro.skyshop.all.SearchEngile;
 
-import org.skypro.skyshop.product.*;
+import org.skypro.skyshop.product.ext.Headphones;
+import org.skypro.skyshop.product.ext.Laptop;
+import org.skypro.skyshop.product.ext.Smartphone;
 
 import java.util.Arrays;
 
@@ -15,32 +17,48 @@ public class App {
         SearchEngile engine = new SearchEngile(10);
 
 
-        engine.add(new Laptop("Ноутбук","Игровой ноутбук с RTX 4090"));
-        engine.add(new Smartphone("Смартфон", "Смартфон с OLED-экраном"));
-        engine.add(new Headphones("Наушники", "Беспроводные наушники с шумоподавлением"));
+        engine.add(new Smartphone("Смартфон Xiaomi", "1"));
+        engine.add(new Laptop("Ноутбук Lenovo", "2"));
+        engine.add(new Headphones("Наушники Samsung", "3"));
+        engine.add(new Headphones("Умные наушники Huawei", "4"));
 
 
-        engine.add(new Article("Обзор ноутбуков", "Лучшие игровые ноутбуки 2024 года"));
-        engine.add(new Article("Как выбрать смартфон", "Топ-5 критериев выбора смартфона"));
-        engine.add(new Article("Новости технологий", "ИИ в повседневной жизни"));
+        engine.add(new Article(
+                "Как выбрать смартфон",
+                "Рейтинг лучших смартфонов 2023: Xiaomi, Samsung, Apple"
+        ));
+        engine.add(new Article(
+                "Обзор ноутбуков",
+                "Топ-5 ноутбуков для работы: Lenovo, ASUS, HP"
+        ));
+        engine.add(new Article(
+                "Гид по планшетам",
+                "Сравнение планшетов Samsung и Apple: плюсы и минусы"
+        ));
+        engine.add(new Article(
+                "Умные наушники 2023",
+                "Лучшие умные наушники: Huawei vs Xiaomi"
+        ));
 
 
-        System.out.println("=== Поиск по запросу 'ноут' ===");
-        Searchable[] results1 = engine.search("ноут");
-        System.out.println(Arrays.toString(results1));
+        System.out.println("=== Поиск 'Xiaomi' ===");
+        printResults(engine.search("Xiaomi"));
 
-        System.out.println("\n=== Поиск по запросу 'Смарт' ===");
-        Searchable[] results2 = engine.search("Смарт");
-        System.out.println(Arrays.toString(results2));
+        System.out.println("\n=== Поиск 'ноутбук' (регистр) ===");
+        printResults(engine.search("ноутбук"));
 
-        System.out.println("\n=== Поиск по запросу 'игр' ===");
-        Searchable[] results3 = engine.search("игр");
-        System.out.println(Arrays.toString(results3));
+        System.out.println("\n=== Поиск '2023' (общий термин) ===");
+        printResults(engine.search("2023"));
+    }
 
-        System.out.println("\n=== Поиск по запросу 'телевизор' ===");
-        Searchable[] results4 = engine.search("телевизор");
-        System.out.println(Arrays.toString(results4));
+    private static void printResults(Searchable[] results) {
+        for (int i = 0; i < results.length; i++) {
+            if (results[i] != null) {
+                System.out.printf("%d. %s\n", i + 1, results[i].getStringRepresentation());
+            }
+        }
     }
 }
+
 
 

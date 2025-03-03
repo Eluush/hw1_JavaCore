@@ -7,10 +7,9 @@ public abstract class Product implements Searchable {
     private final String description;
 
 
-
-    public Product(String name,String description) {
+    public Product(String name, String description) {
         this.name = name;
-        this.description=description;
+        this.description = description;
     }
 
     public String getName() {

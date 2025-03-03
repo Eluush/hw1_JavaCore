@@ -28,6 +28,7 @@ public final class Article implements Searchable {
     public String getName() {
         return title;
     }
+
 }
 
 
