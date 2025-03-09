@@ -32,10 +32,10 @@ public class App {
 
 
         } finally {
-            System.out.println( "finally block");
+            System.out.println("finally block");
         }
 
-        }
+    }
 
     private static void testInvalidSimpleProduct() {
         try {

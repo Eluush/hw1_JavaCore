@@ -1,4 +1,5 @@
 package org.skypro.skyshop.all;
+
 import org.skypro.skyshop.all.BestResultNotFound;
 
 public class SearchEngile {
@@ -38,7 +39,7 @@ public class SearchEngile {
         Searchable bestMatch = null;
         int maxCount = 0;
 
-        for (Searchable item :  searchables) {
+        for (Searchable item : searchables) {
             if (item != null) {
                 String term = item.getSearchTerm().toLowerCase();
                 int count = countOccurrences(term, search.toLowerCase());
