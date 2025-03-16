@@ -29,6 +29,7 @@ public class ProductBasket {
 
     public void printContents() {
 
+
         boolean isEmpty = true;
         int total = 0;
         int specialCount = 0;

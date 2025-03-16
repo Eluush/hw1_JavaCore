@@ -9,6 +9,7 @@ public class SearchEngile {
 
     public SearchEngile(int capacity) {
 
+
         searchables = new Searchable[capacity];
     }
 
