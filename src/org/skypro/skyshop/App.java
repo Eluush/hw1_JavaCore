@@ -1,64 +1,65 @@
 package org.skypro.skyshop;
-
-import org.skypro.skyshop.all.Article;
-import org.skypro.skyshop.all.Searchable;
 import org.skypro.skyshop.all.SearchEngile;
-
-import org.skypro.skyshop.product.ext.Headphones;
-import org.skypro.skyshop.product.ext.Laptop;
-import org.skypro.skyshop.product.ext.Smartphone;
-
-import java.util.Arrays;
+import org.skypro.skyshop.backet.FoodProduct;
+import org.skypro.skyshop.backet.ProductBasket;
+import org.skypro.skyshop.all.BestResultNotFound;
+import org.skypro.skyshop.product.Product;
 
 
-public class App {
-    public static void main(String[] args) {
-
-        SearchEngile engine = new SearchEngile(10);
+import java.util.List;
 
 
-        engine.add(new Smartphone("Смартфон Xiaomi", "1"));
-        engine.add(new Laptop("Ноутбук Lenovo", "2"));
-        engine.add(new Headphones("Наушники Samsung", "3"));
-        engine.add(new Headphones("Умные наушники Huawei", "4"));
+public  class App {
+    public static void main(String[] args) throws BestResultNotFound {
+        ProductBasket basket = new ProductBasket();
+
+        Product apple = new FoodProduct("Apple", "1");
+        Product banana = new FoodProduct("Banana", "2");
+        Product anotherApple = new FoodProduct("Apple", "3");
+
+        basket.addProduct(apple);
+        basket.addProduct(banana);
+        basket.addProduct(anotherApple);
 
 
-        engine.add(new Article(
-                "Как выбрать смартфон",
-                "Рейтинг лучших смартфонов 2023: Xiaomi, Samsung, Apple"
-        ));
-        engine.add(new Article(
-                "Обзор ноутбуков",
-                "Топ-5 ноутбуков для работы: Lenovo, ASUS, HP"
-        ));
-        engine.add(new Article(
-                "Гид по планшетам",
-                "Сравнение планшетов Samsung и Apple: плюсы и минусы"
-        ));
-        engine.add(new Article(
-                "Умные наушники 2023",
-                "Лучшие умные наушники: Huawei vs Xiaomi"
-        ));
+        List<Product> removedProducts = basket.removeProductsByName("Apple");
 
-
-        System.out.println("=== Поиск 'Xiaomi' ===");
-        printResults(engine.search("Xiaomi"));
-
-        System.out.println("\n=== Поиск 'ноутбук' (регистр) ===");
-        printResults(engine.search("ноутбук"));
-
-        System.out.println("\n=== Поиск '2023' (общий термин) ===");
-        printResults(engine.search("2023"));
-    }
-
-    private static void printResults(Searchable[] results) {
-        for (int i = 0; i < results.length; i++) {
-            if (results[i] != null) {
-                System.out.printf("%d. %s\n", i + 1, results[i].getStringRepresentation());
-            }
+        System.out.println("Удаленные продукты: " + removedProducts.size());
+        for (Product product : removedProducts) {
+            System.out.println(product.getName() + " - " + product.getPrice());
         }
+
+
+        basket.printBasket();
+
+
+        List<Product> emptyRemovedProducts = basket.removeProductsByName("Orange");
+
+        if (emptyRemovedProducts.isEmpty()) {
+            System.out.println("Список пуст");
+        }
+
+
+        basket.printBasket();
+
+
+        SearchEngile searchEngine = new SearchEngile();
+
+        searchEngine.addData("Apple pie");
+        searchEngine.addData("Banana bread");
+        searchEngine.addData("Apple tart");
+
+
+        List<String> searchResults = searchEngine.search("Apple");
+
+        System.out.println("Результаты поиска:");
+        for (String result : searchResults) {
+            System.out.println(result);
+        }
+
     }
 }
+
 
 
 

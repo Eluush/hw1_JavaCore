@@ -1,34 +1,32 @@
 package org.skypro.skyshop.all;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SearchEngile {
-    private Searchable[] searchables;
-    private int currentIndex = 0;
 
-    public SearchEngile(int capacity) {
-        searchables = new Searchable[capacity];
+
+    private List<String> data;
+
+    public SearchEngile() {
+        this.data = new ArrayList<>();
     }
 
-    public SearchEngile(Searchable[] searchables) {
-        this.searchables = searchables;
+    public void addData(String item) {
+        data.add(item);
     }
 
-    public void add(Searchable item) {
-        if (currentIndex < searchables.length) {
-            searchables[currentIndex++] = item;
-        }
-    }
+    public List<String> search(String query) {
+        List<String> results = new ArrayList<>();
 
-    public Searchable[] search(String query) {
-        Searchable[] results = new Searchable[5];
-        int count = 0;
-        for (Searchable item : searchables) {
-            if (item == null) continue;
-            if (item.getSearchTerm().contains(query)) {
-                results[count++] = item;
-                if (count == 5) break;
+        for (String item : data) {
+            if (item.contains(query)) {
+                results.add(item);
             }
         }
+
         return results;
     }
-
 }
+
+
