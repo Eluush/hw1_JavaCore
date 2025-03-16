@@ -5,7 +5,7 @@ import org.skypro.skyshop.all.Searchable;
 
 public abstract class Product implements Searchable {
     private final String name;
-    private final String description;
+    private String price;
 
 
     public Product(String name, String description) {
@@ -14,8 +14,14 @@ public abstract class Product implements Searchable {
                     "null");
         }
         this.name = name;
-        this.description = description;
+        this.price = price;
     }
+
+    public Product(String apple, int i, String price) {
+        this.price = price;
+        name = "";
+    }
+
 
     public String getName() {
         return name;

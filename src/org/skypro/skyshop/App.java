@@ -1,82 +1,64 @@
 package org.skypro.skyshop;
-
-import org.skypro.skyshop.all.Article;
-import org.skypro.skyshop.all.Searchable;
 import org.skypro.skyshop.all.SearchEngile;
-
+import org.skypro.skyshop.backet.FoodProduct;
 import org.skypro.skyshop.backet.ProductBasket;
-import org.skypro.skyshop.backet.SimpleProduct;
-import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.all.BestResultNotFound;
 import org.skypro.skyshop.product.Product;
 
 
-public class App {
+import java.util.List;
+
+
+public  class App {
     public static void main(String[] args) throws BestResultNotFound {
-
         ProductBasket basket = new ProductBasket();
-        SearchEngile searchEngine = new SearchEngile(10);
 
-        Article article1 = new Article("Польза яблок", "Яблоки полезны для здоровья.");
-        Article article2 = new Article("Секреты бананов", "Бананы содержат много калия.");
+        Product apple = new FoodProduct("Apple", "1");
+        Product banana = new FoodProduct("Banana", "2");
+        Product anotherApple = new FoodProduct("Apple", "3");
 
-        searchEngine.add(article1);
-        searchEngine.add(article2);
-
-        try {
-            Searchable bestMatch = searchEngine.findBestMatch("яблоки");
-            System.out.println("Лучший результат для 'яблоки': " + bestMatch.getStringRepresentation());
-
-            bestMatch = searchEngine.findBestMatch("не существующий запрос");
-            System.out.println("Лучший результат для 'не существующий запрос': " + bestMatch.getStringRepresentation());
+        basket.addProduct(apple);
+        basket.addProduct(banana);
+        basket.addProduct(anotherApple);
 
 
-        } finally {
-            System.out.println("finally block");
-        }
+        List<Product> removedProducts = basket.removeProductsByName("Apple");
 
-    }
-
-    private static void testInvalidSimpleProduct() {
-        try {
-            SimpleProduct invalidName = new SimpleProduct("   ", "1", 100);
-        } catch (IllegalArgumentException e) {
-            System.out.println("[Ошибка] SimpleProduct (имя): " + e.getMessage());
+        System.out.println("Удаленные продукты: " + removedProducts.size());
+        for (Product product : removedProducts) {
+            System.out.println(product.getName() + " - " + product.getPrice());
         }
 
 
-        try {
-            SimpleProduct invalidPrice = new SimpleProduct("Молоко", "2", 0);
-        } catch (IllegalArgumentException e) {
-            System.out.println("[Ошибка] SimpleProduct (цена): " + e.getMessage());
-        }
-    }
+        basket.printBasket();
 
-    private static void testInvalidDiscountedProduct() {
-        try {
-            DiscountedProduct invalidName = new DiscountedProduct("  ", "3", 200, 10);
-        } catch (IllegalArgumentException e) {
-            System.out.println("[Ошибка] DiscountedProduct (имя): " + e.getMessage());
+
+        List<Product> emptyRemovedProducts = basket.removeProductsByName("Orange");
+
+        if (emptyRemovedProducts.isEmpty()) {
+            System.out.println("Список пуст");
         }
 
 
-        try {
-            DiscountedProduct invalidPrice = new DiscountedProduct("Чай", "4", -50, 20);
-        } catch (IllegalArgumentException e) {
-            System.out.println("[Ошибка] DiscountedProduct (цена): " + e.getMessage());
+        basket.printBasket();
+
+
+        SearchEngile searchEngine = new SearchEngile();
+
+        searchEngine.addData("Apple pie");
+        searchEngine.addData("Banana bread");
+        searchEngine.addData("Apple tart");
+
+
+        List<String> searchResults = searchEngine.search("Apple");
+
+        System.out.println("Результаты поиска:");
+        for (String result : searchResults) {
+            System.out.println(result);
         }
-
-
-        try {
-            DiscountedProduct invalidDiscount = new DiscountedProduct("Кофе", "5", 100, 110);
-        } catch (IllegalArgumentException e) {
-            System.out.println("[Ошибка] DiscountedProduct (скидка): " + e.getMessage());
-        }
-
 
     }
 }
-
 
 
 
