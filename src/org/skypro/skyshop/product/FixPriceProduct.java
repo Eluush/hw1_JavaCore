@@ -4,12 +4,12 @@ public class FixPriceProduct extends Product {
     private static int FIXED_PRICE = 150;
 
     public FixPriceProduct(String name,String description) {
-        super(name,description);
+        super(name, Integer.valueOf(description));
     }
 
     @Override
-    public int getPrice() {
-        return FIXED_PRICE;
+    public Integer getPrice() {
+        return Integer.valueOf(price);
     }
 
     @Override

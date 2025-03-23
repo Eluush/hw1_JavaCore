@@ -3,9 +3,17 @@ package org.skypro.skyshop.backet;
 import org.skypro.skyshop.product.Product;
 
 public class FoodProduct extends Product {
+
+    public FoodProduct(String name, Integer price) {
+        super(name, price);
+    }
     @Override
-    public int getPrice() {
-        return 0;
+    public Integer getPrice() {
+        return Integer.valueOf(price);
+    }
+
+    private String price() {
+        return price;
     }
 
     @Override
@@ -13,7 +21,5 @@ public class FoodProduct extends Product {
         return false;
     }
 
-    public FoodProduct(String name, String price) {
-        super(name, price);
-    }
+
 }

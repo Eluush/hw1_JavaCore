@@ -2,56 +2,41 @@ package org.skypro.skyshop.backet;
 
 import org.skypro.skyshop.product.Product;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class ProductBasket {
-    private List<Product> products;
+    private Map<String, List<Product>> productsMap;
 
     public ProductBasket() {
-        this.products = new ArrayList<>();
+        productsMap = new HashMap<>();
     }
 
     public void addProduct(Product product) {
-        products.add(product);
+        productsMap.computeIfAbsent(product.getName(), k -> new ArrayList<>()).add(product);
     }
 
     public void removeProduct(Product product) {
-        products.remove(product);
+        productsMap.remove(product);
     }
 
-    public List<Product> getProducts() {
-        return new ArrayList<>(products); // Возвращаем копию списка
+    public List<Product> getProductsByName(String name) {
+        return productsMap.getOrDefault(name, new ArrayList<>());
     }
 
     public int getTotalProducts() {
-        return products.size();
+        return productsMap.size();
     }
 
-    public List<Product> removeProductsByName(String name) {
-        List<Product> removedProducts = new ArrayList<>();
-        Iterator<Product> iterator = products.iterator();
 
-        while (iterator.hasNext()) {
-            Product product = iterator.next();
-            if (product.getName().equals(name)) {
-                removedProducts.add(product);
-                iterator.remove(); // Удаляем продукт из списка
-            }
-        }
-
-        return removedProducts; // Возвращаем список удаленных продуктов
-    }
-
-    public void printBasket() {
-        if (products.isEmpty()) {
-            System.out.println("Корзина пуста.");
-        } else {
-            System.out.println("Содержимое корзины:");
-            for (Product product : products) {
-                System.out.println(product.getName() + " - " + product.getPrice());
+    public void printAllProducts() {
+        for (Map.Entry<String, List<Product>> entry : productsMap.entrySet()) {
+            String productName = entry.getKey();
+            List<Product> productList = entry.getValue();
+            for (Product product : productList) {
+                System.out.println(product);
             }
         }
     }
 }
+
+

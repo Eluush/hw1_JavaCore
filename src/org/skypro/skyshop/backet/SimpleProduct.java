@@ -5,7 +5,7 @@ import org.skypro.skyshop.product.Product;
 public class SimpleProduct extends Product {
     private int price;
 
-    public SimpleProduct(String name, String description, int price) {
+    public SimpleProduct(String name, Integer description, int price) {
         super(name, description);
         if (price <= 0) {
             throw new IllegalArgumentException("Цена должна быть строго выше 0.");
@@ -14,8 +14,8 @@ public class SimpleProduct extends Product {
     }
 
     @Override
-    public int getPrice() {
-        return price;
+    public Integer getPrice() {
+        return Integer.valueOf(String.valueOf(0));
     }
 
     @Override
