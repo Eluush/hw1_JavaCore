@@ -1,34 +1,34 @@
 package org.skypro.skyshop.all;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 public class SearchEngile {
-    private Searchable[] searchables;
-    private int currentIndex = 0;
+    private List<Searchable> data; // Изменено на список Searchable
 
-    public SearchEngile(int capacity) {
-        searchables = new Searchable[capacity];
+    public SearchEngile() {
+        this.data = new ArrayList<>();
     }
 
-    public SearchEngile(Searchable[] searchables) {
-        this.searchables = searchables;
+    // Метод добавления Searchable-объектов
+    public void addData(Searchable item) {
+        data.add(item);
     }
 
-    public void add(Searchable item) {
-        if (currentIndex < searchables.length) {
-            searchables[currentIndex++] = item;
-        }
-    }
+    // Метод поиска, возвращающий отсортированную мапу
+    public Map<String, Searchable> search(String query) {
+        Map<String, Searchable> results = new TreeMap<>();
 
-    public Searchable[] search(String query) {
-        Searchable[] results = new Searchable[5];
-        int count = 0;
-        for (Searchable item : searchables) {
-            if (item == null) continue;
-            if (item.getSearchTerm().contains(query)) {
-                results[count++] = item;
-                if (count == 5) break;
+        for (Searchable item : data) {
+            // Проверка, содержит ли имя объекта запрос
+            if (item.getName().toLowerCase().contains(query.toLowerCase())) {
+                // Автоматическая сортировка по имени (ключу) через TreeMap
+                results.putIfAbsent(item.getName(), item); // Игнорирование дубликатов
             }
         }
         return results;
     }
-
 }
+
