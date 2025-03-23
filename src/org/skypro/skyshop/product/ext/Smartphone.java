@@ -4,13 +4,13 @@ import org.skypro.skyshop.product.Product;
 
 public class Smartphone extends Product {
 
-    public Smartphone(String name, Integer description) {
+    public Smartphone(String name, String description) {
         super(name, description);
     }
 
     @Override
-    public Integer getPrice() {
-        return Integer.valueOf(price);
+    public int getPrice() {
+        return 0;
     }
 
     @Override

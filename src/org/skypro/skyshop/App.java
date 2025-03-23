@@ -1,45 +1,43 @@
 package org.skypro.skyshop;
+
 import org.skypro.skyshop.all.SearchEngile;
+import org.skypro.skyshop.all.Searchable;
 import org.skypro.skyshop.backet.FoodProduct;
 import org.skypro.skyshop.backet.ProductBasket;
 import org.skypro.skyshop.all.BestResultNotFound;
+import org.skypro.skyshop.product.Product;
 
 
-import java.util.List;
+import java.util.Map;
 
 
-public  class App {
+public class App {
     public static void main(String[] args) throws BestResultNotFound {
-        ProductBasket cart = new ProductBasket();
+        ProductBasket basket = new ProductBasket();
 
-        cart.addProduct(new FoodProduct("Apple", 10));
-        cart.addProduct(new FoodProduct("Banana", 20));
+        Product apple = new FoodProduct("Apple", "1");
+        Product banana = new FoodProduct("Banana", "2");
+        Product anotherApple = new FoodProduct("Apple", "3");
 
-
-        cart.addProduct(new FoodProduct("Orange", 30));
-
-        cart.printAllProducts();
-
-
+        System.out.println("продукт - " + apple + " цена - " + apple.getPrice());
+        System.out.println("продукт - " + banana + " цена - " + banana.getPrice());
+        System.out.println("продукт - " + anotherApple + " цена - " + anotherApple.getPrice());
 
 
-        SearchEngile searchEngine = new SearchEngile();
-
-        searchEngine.addData("Apple pie");
-        searchEngine.addData("Banana bread");
-        searchEngine.addData("Apple tart");
+        SearchEngile engine = new SearchEngile();
 
 
-        List<String> searchResults = searchEngine.search("Apple");
+        engine.addData(new FoodProduct("Apple", "100"));
+        engine.addData(new FoodProduct("Banana", "80"));
+        engine.addData(new FoodProduct("Pineapple", "200"));
 
-        System.out.println("Результаты поиска:");
-        for (String result : searchResults) {
-            System.out.println(result);
-        }
 
+        Map<String, Searchable> results = engine.search("app");
+
+
+        System.out.println("Найдено " + results.size() + " результатов:");
+        results.forEach((name, item) ->
+                System.out.println("Название: " + name + ", Цена: " + item.getPrice())
+        );
     }
 }
-
-
-
-

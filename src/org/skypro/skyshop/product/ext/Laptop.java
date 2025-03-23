@@ -4,8 +4,8 @@ import org.skypro.skyshop.product.Product;
 
 public class Laptop extends Product {
     @Override
-    public Integer getPrice() {
-        return Integer.valueOf(price);
+    public int getPrice() {
+        return 0;
     }
 
     @Override
@@ -14,6 +14,6 @@ public class Laptop extends Product {
     }
 
     public Laptop(String name, String description) {
-        super(name, Integer.valueOf(description));
+        super(name, description);
     }
 }

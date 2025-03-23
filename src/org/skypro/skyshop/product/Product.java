@@ -4,20 +4,24 @@ import org.skypro.skyshop.all.Searchable;
 
 
 public abstract class Product implements Searchable {
-    private final String name;
-    public String price;
+    public final String name;
+    private int price;
 
-
-    public Product(String name, Integer description) {
-        if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Название продукта не может быть пустой строкой или раной нулю" +
-                    "null");
-        }
+    public Product(String name, String priceStr) {
         this.name = name;
-        this.price = price;
+        try {
+            this.price = Integer.parseInt(priceStr);
+        } catch (NumberFormatException e) {
+            this.price = 0;
+        }
     }
 
-    public Product(String apple, int i, String price) {
+    public int getPrice() {
+        return price;
+    }
+
+
+    public Product(String apple, int i, int price) {
         this.price = price;
         name = "";
     }
@@ -27,8 +31,6 @@ public abstract class Product implements Searchable {
         return name;
     }
 
-
-    public abstract Integer getPrice();
 
     public abstract boolean isSpesial();
 
@@ -50,7 +52,6 @@ public abstract class Product implements Searchable {
 
 
 }
-
 
 
 

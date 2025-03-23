@@ -4,12 +4,12 @@ import org.skypro.skyshop.product.Product;
 
 public class Headphones extends Product {
     public Headphones(String name, String description) {
-        super(name, Integer.valueOf(description));
+        super(name, description);
     }
 
     @Override
-    public Integer getPrice() {
-        return Integer.valueOf(price);
+    public int getPrice() {
+        return 0;
     }
 
     @Override

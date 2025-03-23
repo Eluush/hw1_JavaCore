@@ -6,7 +6,7 @@ public class DiscountedProduct extends Product {
 
 
     public DiscountedProduct(String name, String description, int basePrice, int discountPercentage) {
-        super(name, Integer.valueOf(description));
+        super(name, description);
         if (basePrice <= 0  ) {
             throw new IllegalArgumentException("Базовая цена должна быть строго больше 0");
         }
@@ -19,8 +19,8 @@ public class DiscountedProduct extends Product {
 
     @Override
 
-    public Integer getPrice() {
-        return Integer.valueOf(String.valueOf(basePrice * (100 - discountPercentage) / 100));
+    public int getPrice() {
+        return basePrice * (100 - discountPercentage) / 100;
     }
 
     @Override
@@ -35,4 +35,3 @@ public class DiscountedProduct extends Product {
 
 
 }
-

@@ -29,6 +29,12 @@ public final class Article implements Searchable {
         return title;
     }
 
+    @Override
+    public int getPrice() {
+        return 0;
+    }
+
+
 }
 
 
