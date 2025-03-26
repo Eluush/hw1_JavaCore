@@ -1,5 +1,6 @@
 package org.skypro.skyshop;
 
+
 import org.skypro.skyshop.all.SearchEngile;
 import org.skypro.skyshop.all.Searchable;
 import org.skypro.skyshop.backet.FoodProduct;
@@ -8,7 +9,8 @@ import org.skypro.skyshop.all.BestResultNotFound;
 import org.skypro.skyshop.product.Product;
 
 
-import java.util.Map;
+
+import java.util.Set;
 
 
 public class App {
@@ -24,20 +26,18 @@ public class App {
         System.out.println("продукт - " + anotherApple + " цена - " + anotherApple.getPrice());
 
 
-        SearchEngile engine = new SearchEngile();
+        SearchEngile engine = new SearchEngile(args);
+        Set<Searchable> results = engine.search("phone");
+
+        for (Searchable item : results) {
+            System.out.println("Название: " + item.getName());
+
+            if (item instanceof Product) {
+                Product product = (Product) item;
+                System.out.println("Цена: " + product.getPrice());
+            }
 
 
-        engine.addData(new FoodProduct("Apple", "100"));
-        engine.addData(new FoodProduct("Banana", "80"));
-        engine.addData(new FoodProduct("Pineapple", "200"));
-
-
-        Map<String, Searchable> results = engine.search("app");
-
-
-        System.out.println("Найдено " + results.size() + " результатов:");
-        results.forEach((name, item) ->
-                System.out.println("Название: " + name + ", Цена: " + item.getPrice())
-        );
+        }
     }
 }
