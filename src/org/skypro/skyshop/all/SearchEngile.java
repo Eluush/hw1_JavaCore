@@ -1,34 +1,32 @@
 package org.skypro.skyshop.all;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 public class SearchEngile {
-    private Searchable[] searchables;
-    private int currentIndex = 0;
 
-    public SearchEngile(int capacity) {
-        searchables = new Searchable[capacity];
+    private Set<Searchable> data;
+
+    public SearchEngile(Object items) {
+        this.data = new HashSet<>();
     }
 
-    public SearchEngile(Searchable[] searchables) {
-        this.searchables = searchables;
+
+    public void addData(Searchable item) {
+        data.add(item);
     }
 
-    public void add(Searchable item) {
-        if (currentIndex < searchables.length) {
-            searchables[currentIndex++] = item;
-        }
-    }
 
-    public Searchable[] search(String query) {
-        Searchable[] results = new Searchable[5];
-        int count = 0;
-        for (Searchable item : searchables) {
-            if (item == null) continue;
-            if (item.getSearchTerm().contains(query)) {
-                results[count++] = item;
-                if (count == 5) break;
-            }
-        }
-        return results;
+    public Set<Searchable> search(String query) {
+        return data.stream()
+                .filter(item -> item.getName().toLowerCase().contains(query.toLowerCase()))
+                .collect(Collectors.toCollection(() -> new TreeSet<>(new SearchResultComparator())));
     }
-
 }
+
+
+
+
+
+
+

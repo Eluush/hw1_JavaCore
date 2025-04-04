@@ -1,10 +1,10 @@
-package org.skypro.skyshop.product.ext;
+package org.skypro.skyshop.backet;
 
 import org.skypro.skyshop.product.Product;
 
-public class Headphones extends Product {
-    public Headphones(String name, String description) {
-        super(name, description);
+public class NonFoodProduct extends Product {
+    public NonFoodProduct(String name, String price) {
+        super(name, price);
     }
 
     @Override
@@ -16,4 +16,5 @@ public class Headphones extends Product {
     public boolean isSpesial() {
         return false;
     }
+
 }
