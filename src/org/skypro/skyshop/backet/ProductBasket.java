@@ -18,25 +18,40 @@ public class ProductBasket {
     }
 
     public void removeProduct(Product product) {
-        products.remove(product);
+        String productName = product.getName();
+        products.computeIfPresent(productName, (k, v) -> {
+            v.remove(product);
+            return v.isEmpty() ? null : v;
+        });
     }
 
     public List<Product> getAllProducts() {
-        return products.values().stream().flatMap(List::stream).collect(Collectors.toList());
+        return products.values().stream()
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
     }
 
     public int getTotalQuantity() {
-        return products.values().stream().mapToInt(List::size).sum();
+        return products.values().stream()
+                .mapToInt(List::size)
+                .sum();
     }
-
 
     public void printContents() {
         System.out.println("Содержимое корзины:");
-        products.forEach((name, items) ->
-                items.forEach(product ->
+        products.values().stream()
+                .flatMap(List::stream)
+                .forEach(product ->
                         System.out.println(product.getName() + " - " + product.getPrice() + " руб.")
-                )
-        );
+                );
         System.out.println("Всего товаров: " + getTotalQuantity() + " шт.");
+    }
+
+    // Пример метода для подсчёта специальных продуктов
+    private long getSpecialCount() {
+        return products.values().stream()
+                .flatMap(List::stream)
+                .filter(product -> product.getPrice() > 1000) // Пример условия
+                .count();
     }
 }
